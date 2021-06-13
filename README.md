@@ -29,32 +29,25 @@ Commands:
 PS C:\>
 ```
 
-## Getting an Authentication Token
-To start using the core features of Replit CLI however, you will need to authenticate with the CLI Application with your Replit Session ID. Your session ID is a unique identifier linked with your account that acts as a token to access all APIs and Services. To get your sid, look for the cookie that is named ` connect.sid ` when visiting Replit.
-
-To do so, first open the Developer Tools for your browser and open the ` Network ` tab. To open the Developer Tools -
-
-For Safari, you may need to enable the developer menu. See [here](https://support.apple.com/guide/safari/use-the-developer-tools-in-the-develop-menu-sfri20948/mac) for more information.
-
-Once you are sure that your Developer Tools are enabled, (they are enabled by default on Firefox, Chrome, and Edge), use the hotkey ` CTRL + SHIFT + I ` for Windows platforms, and ` CMD + SHIFT + I ` for macOS platforms. This should open a Developer's pane.
-
-![image](https://sjcdn.is-a.dev/file/gqoxgv)
-
-Once you see this pane, click the ` Network ` tab. If necessary, perform a Reload to see HTTP requests. Once HTTP Requests are being shown, search for ` ~ `
-
-![image](https://sjcdn.is-a.dev/file/coojip)
-
-- Click on the request that is requesting the file `~`
-- Once clicked, a new pane should pop up
-![image](https://sjcdn.is-a.dev/file/qrpxmu)
-On this new pane, click the ` Cookies ` tab and copy the value for the cookie named ` connect.sid `. This is your SID token. **DO NOT SHARE THIS WITH ANYONE!** Doing so will grant anyone complete access to your Replit account.
-
-## Logging In
-Now that you have your SID value, run the following command -
-
-```
-replit login insert_sid_here
-```
+## Installation
+- Make sure you have Python 3.6 or higher installed. To do so, type `python` inside of a Command Prompt/Terminal instance. If you have Python installed, a Python shell will come up with the version number. (type ` quit() ` inside of the python shell to quit it) If you do not have Python 3.6+ or do not have Python at all, you can install it by downloading the installer for your platform located [here](https://www.python.org/downloads/)
+- Once you have python, run the following command- ` pip install replit-cli `, preferably with Administrator access (This includes Administrator accounts on macOS, and `Run as Administrator` on Windows) to make sure that your PC recognizes Replit CLI properly. 
+- Once installed, type `replit` into a shell to get started!
 
 ## Documentation
-And you should see a command letting you know that your SID has been saved! Now you are ready to fully use Replit CLI! To see the docs, click [here](https://github.com/CoolCoderSJ/Replit-CLI/wiki)
+To see the docs and for information on finding your authorization token, click [here](https://github.com/CoolCoderSJ/Replit-CLI/wiki)
+
+## Building From Source
+To build from source, run the following commands-
+```
+git clone https://github.com/CoolCoderSJ/Replit-CLI.git
+cd .\replit-cli\replit_cli
+python main.py
+```
+
+## Credits
+Thanks to the many people who helped grow this project-
+- @Codemonkey51 and @turbio for help with Crosis, the Replit API
+- @SpotandJake for help with the JS server counterpart, used for some operations.
+- @sugarfi for the initial Python Client for Crosis. (This has been tampered with and published to PyPI)
+- And everyone on the [Replit Discord Server](https://replit.com/discord) for the motivation, and general help.
