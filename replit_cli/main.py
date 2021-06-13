@@ -411,6 +411,44 @@ def db(url:str, data:bool=False, key:str="", value:str="", delete:str=""):
 		db[key] = value
 		typer.echo(f"The following pair has been added/modified in the environment - {key}={value}")
 
+@app.command(help="Lookup the details for a Replit User")
+def user(usr:str):
+	r = requests.get(f"https://replit.com/data/profiles/{usr}")
+	try:
+		r = r.json()
+	except:
+		typer.echo("ERR! API returned invalid Response. The most common cause for this error is an invalid user.")
+		return
+
+	org = r['organization']
+	repls = {}
+	for repl in r['repls']:
+		repls[repl['title']] = f"https://replit.com{repl['url']}"
+
+	name = r['firstName'] + r['lastName']
+	bio = r['bio']
+	icon = r['icon']['url']
+	topLangs = " | ".join(r['topLanguages'])
+	if r['hacker']:
+		hacker = "{Hacker}"
+	else:
+		hacker = ""
+
+	replstr = ""
+	for repl in repls:
+		replstr += repl + "\n" + repls[repl] + "\n\n"
+
+	text = f"""
+{usr} - {name} {hacker}
+{org}
+{bio}
+----------------------------------
+Profile Picture URL - {icon}
+Top Languages - {topLangs}
+Repls -
+{replstr}
+	"""
+	typer.echo(text)
 
 if __name__ == "main":
 	app()
