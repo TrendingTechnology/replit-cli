@@ -1,5 +1,6 @@
 # Replit CLI
 ![logo](https://sjcdn.is-a.dev/file/ravjqk)
+
 Welcome to Replit CLI! With the Replit CLI Application, you can work with your repls locally, including clone, pull, and push, the core features of the CLI. The full list of features includes-
 
 ```
