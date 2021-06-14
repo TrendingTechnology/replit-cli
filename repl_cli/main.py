@@ -8,7 +8,7 @@ import snow_pyrepl as pyrepl
 from typing import Optional
 from replit.database import Database
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 homedir = Path.home()
 homedir = str(homedir).replace("\\", "/")
 __sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
@@ -124,7 +124,7 @@ def push():
 					files.append(file.replace("\\", "/"))
 					file = file.replace("\\", "/")
 					typer.echo(f"Appending file {file} to list.")
-					if not "." in file:
+					if not "." in file and "__pycache__" not in file:
 						cancontinue = False
 					elif ("." in file or "__pycache__" in file) and file == filelist[-1]:
 						cancontinue = True
