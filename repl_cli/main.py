@@ -8,7 +8,7 @@ import snow_pyrepl as pyrepl
 from typing import Optional
 from replit.database import Database
 
-__version__ = "1.0.0"
+__version__ = "1.0.3"
 homedir = Path.home()
 homedir = str(homedir).replace("\\", "/")
 __sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
@@ -96,8 +96,8 @@ def push():
 	url = content.split("=")[1].split("\n")[0]
 	uuid = content.split("=")[-1].strip()
 	sid = __sid__.strip()
-	slug = url.split("/@")[-1]
-	data = requests.get(f"https://replit.com/data/repls/{slug}", cookies={"connect.sid": sid}).json()
+	slug = url.split("/@")[-1].split("\n")[0].strip()
+	data = requests.get(f"https://replit.com/data/repls/@{slug}", cookies={"connect.sid": sid}).json()
 	if not data['is_owner']:
 		typer.echo("You do not have the correct permissions to write to this repl.")
 		return
@@ -119,11 +119,14 @@ def push():
 
 			while not cancontinue:
 				filelist = glob.glob(f"{newfile}*")
+				typer.echo("Found Sub-Files/Dirs")
 				for file in filelist:
 					files.append(file.replace("\\", "/"))
+					file = file.replace("\\", "/")
+					typer.echo(f"Appending file {file} to list.")
 					if not "." in file:
 						cancontinue = False
-					elif "." in file and file == filelist[-1]:
+					elif ("." in file or "__pycache__" in file) and file == filelist[-1]:
 						cancontinue = True
 						break
 

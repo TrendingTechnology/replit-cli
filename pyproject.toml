@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "repl-cli"
-version = "1.0.0"
+version = "1.0.3"
 description = ""
 authors = ["SnowCoder <donot@email.me>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-replit = "replit_cli.main:app"
+replit = "repl_cli.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.8"
