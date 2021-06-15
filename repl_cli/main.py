@@ -4,10 +4,13 @@ import snow_pyrepl as pyrepl
 from typing import Optional
 from replit.database import Database
 
-__version__ = "1.0.8"
+__version__ = "1.0.9"
 homedir = Path.home()
 homedir = str(homedir).replace("\\", "/")
-__sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
+try:
+	__sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
+except:
+	__sid__ = None
 
 app = typer.Typer()
 
