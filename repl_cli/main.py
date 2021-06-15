@@ -4,7 +4,7 @@ import snow_pyrepl as pyrepl
 from typing import Optional
 from replit.database import Database
 
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 homedir = Path.home()
 homedir = str(homedir).replace("\\", "/")
 __sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
