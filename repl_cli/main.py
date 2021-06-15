@@ -1,14 +1,10 @@
 import typer, requests, os, zipfile, glob, shutil, json, time
 from pathlib import Path
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 import snow_pyrepl as pyrepl
 from typing import Optional
 from replit.database import Database
 
-__version__ = "1.0.4"
+__version__ = "1.0.7"
 homedir = Path.home()
 homedir = str(homedir).replace("\\", "/")
 __sid__ = open(f"{homedir}/replit-cli/connect.sid", "r").read().strip()
@@ -121,12 +117,18 @@ def push():
 				filelist = glob.glob(f"{newfile}*")
 				typer.echo("Found Sub-Files/Dirs")
 				for file in filelist:
-					files.append(file.replace("\\", "/"))
-					file = file.replace("\\", "/")
-					typer.echo(f"Appending file {file} to list.")
-					if not "." in file and "__pycache__" not in file:
-						cancontinue = False
-					elif ("." in file or "__pycache__" in file) and file == filelist[-1]:
+					if "__pycache__" not in file:
+						files.append(file.replace("\\", "/"))
+						file = file.replace("\\", "/")
+						typer.echo(f"Appending file {file} to list.")
+					if not "." in file:
+						if not "__pycache__" in file:
+							cancontinue = False
+						else:
+							typer.echo("Found Pycache, reached end of list, ending loop...")
+							cancontinue = True
+							break
+					elif file == filelist[-1]:
 						cancontinue = True
 						break
 
